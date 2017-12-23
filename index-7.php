@@ -1,22 +1,68 @@
+
 <?php
 
-if($_POST["submit"]) {
-    $recipient="nataligutierrezaj@gmail.com";o en
-    $subject="Form to email message";
-    $sender=$_POST["name"];
-    $senderEmail=$_POST["email"];
-    $metrics=$_POST["#metrics"];
-    $quantity=$_POST["#quantity"];
-    $container=$_POST["#container"];
-    $origin=$_POST["#origin"];
-    $destiny=$_POST["#destiny"];
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
+echo 'asasasasasasass';
+$banMS=false;
+if (filter_input(INPUT_POST, "g-recaptcha-response")!='') {
+    //var_dump($_POST);
 
-    $mailBody="Name: $sender\nEmail: $senderEmail\n\n$metrics $qunatity\n\n$container\n\n$destiny";
+    //require 'bat\MailHandler.php';
+    include 'bat/MailHandler.php';
+    $Corre=new CorreoEnvi;
+    $name = stripslashes($_POST["name"]);
+    $name2 = stripslashes($_POST["name2"]);
+    $Company = stripslashes($_POST["Company"]);
+    $email = stripslashes($_POST["email"]);
+    $phone = stripslashes($_POST["phone"]);
+    $numbers = stripslashes($_POST["numbers"]);
+    //pounds
+    $name11 = stripslashes($_POST["name11"]);
+    $name12 = stripslashes($_POST["name12"]);
+    $name13 = stripslashes($_POST["name13"]);
+    // CMB
+    $option2 = stripslashes($_POST["option2"]);
+    $name15 = stripslashes($_POST["name15"]);
+    $name16 = stripslashes($_POST["name16"]);
+    //door
+    $option1 = stripslashes($_POST["option1"]);
+    $origin = stripslashes($_POST["origin"]);
+    $destination = stripslashes($_POST["destination"]);
+    $origin_port = stripslashes($_POST["origin_port"]);
+    $destination_port = stripslashes($_POST["destination_port"]);
+    //Dimesion
+    $numbers3 = stripslashes($_POST["numbers3"]);
+    $numbers4 = stripslashes($_POST["numbers4"]);
+    $numbers5 = stripslashes($_POST["numbers5"]);
+    //Description
+    $message1 = stripslashes($_POST["message1"]);
 
-    mail($recipient, $subject, $mailBody, "From: $sender <$senderEmail>");
+    $response = $_POST["g-recaptcha-response"];
+    $secret='6LectD0UAAAAACCPJ3mg-wEcfU-0-Y0ATTmZkp4P';
+    $urlll="https://www.google.com/recaptcha/api/siteverify?secret={$secret}&response={$response}";
+    $c = curl_init($urlll);
+    curl_setopt($c, CURLOPT_RETURNTRANSFER, true);
+    $verify2 = curl_exec($c);
+    curl_close($c);
 
-    $thankYou="<p>Thank you! Your message has been sent.</p>";
+
+    $captcha_success = json_decode($verify2);
+    if ($captcha_success->success == false) {
+        //echo "<p>You are a bot! Go away!</p>";
+        //var_dump($_POST);
+    } else if ($captcha_success->success == true) {
+        // echo "<p>You are not not a bot!</p>";
+        //var_dump($_POST);
+        $retorna=$Corre->formLCLOcean($name,$name2,$Company,$email,$phone,$numbers,$name11,$name12,$name13,$option2,$name15,$name16,$numbers3,$numbers4,$numbers5,$message1);
+        if($retorna){
+            $banMS=true;
+        }
+    }
+    $_POST = array();
+
 }
+
 
 ?>
 <!DOCTYPE html>
@@ -110,18 +156,7 @@ if($_POST["submit"]) {
         <h1 class="navbar-brand navbar-brand_"><a href="index.html"><img src="img/logo.png" alt="logo"></a></h1>
         <nav class="navbar navbar-default navbar-static-top tm_navbar clearfix" role="navigation">
             <ul class="nav sf-menu clearfix">
-            <!--   <li class="active sub-menu"><a href="index.html">Home</a><span></span> 
-                    <ul class="submenu">
-                <li><a href="#">About</a><span></span>
-                          <ul class="submenu">
-                                <li><a href="#">Fresh</a></li>
-                                <li><a href="#">Archive</a></li>
-                          </ul>  
-                        </li>
-                <li><a href="#">History</a></li>
-                        <li><a href="#">News</a></li>
-              </ul>
-                </li> -->
+
                 <li><a href="index-1.html">About Us</a></li>
                 <li  class="sub-menu"><a href="#">Services</a><span></span> 
                     <ul class="submenu">
@@ -222,8 +257,7 @@ if($_POST["submit"]) {
         <p style="text-transform: capitalize;">Intermodal Shipping &copy; <em id="copyright-year"></em><span> | </span><br><a href="http://ajcreativestudios.com/">AJ Creative Studios</a> | <br><a href="http://www.discoveringnewyorkcity.com/">Discovering New York City</p>
         <ul class="follow_icon">
             <li><a href="https://www.linkedin.com/company/intermodal-shipping"><img src="img/follow_icon6.png" alt=""></a></li>
-           <!-- <li><a href="#"><img src="img/follow_icon2.png" alt=""></a></li>
-           <li><a href="#"><img src="img/follow_icon4.png" alt=""></a></li> -->
+
         </ul>
     </div>
 </footer>
