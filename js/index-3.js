@@ -14,6 +14,16 @@ $(document).ready(function() {
     var captchaResponse = grecaptcha.getResponse();
     var poundsKilosSelect = $("#pounds-kilos-select").val();
     var weight = $("#pounds-kilos-number").val();
+    var cbmSelect = $("#cbm-select").val();
+    var cbmQuantity = $("#cbm-number").val();
+    var description = $("#description").val();
+    var doorSelect = $("#door-select").val();
+    var doorOrigin = $("#door-origin").val();
+    var destinationPort = $("#destination-port").val();
+
+    var length = $("#dimension-l").val();
+    var width = $("#dimension-w").val();
+    var height = $("#dimension-h").val();
 
     if (name == '') {
       alert("Enter your name");
@@ -40,6 +50,31 @@ $(document).ready(function() {
       }
     }
 
+    if (cbmSelect == '') {
+      alert("Select CMB or CBF");
+      return false;
+    } else {
+      if (cbmQuantity == '') {
+        alert("Insert CMB or CBF Quantity");
+        return false;
+      }
+    }
+
+    if (doorSelect == '') {
+      alert("Select Door to Port / Port to Port");
+      return false;
+    } else {
+      if (doorOrigin == '' || destinationPort == '') {
+        alert("Enter origin and destination");
+        return false;
+      }
+    }
+
+    if (description == '') {
+      alert("Enter description");
+      return false;
+    }
+
     if (captchaResponse == '') {
       alert("Mark that you are not a robot")
       return false;
@@ -52,9 +87,20 @@ $(document).ready(function() {
       email: email,
       phone: phone,
       piecesNumber: piecesNumber,
+      weight: weight,
+      weightType: poundsKilosSelect,
+      cbm: cbmQuantity,
+      cbmType: cbmSelect,
+      origin: doorOrigin,
+      destinationPort: destinationPort,
+      originType: doorSelect,
+      measures: length + 'x' + width + 'x' + height,
+
       //THIS WILL TELL THE FORM IF THE USER IS CAPTCHA VERIFIED.
       captcha: captchaResponse
     };
+
+    console.log(data);
 
     //Our AJAX POST
     $.ajax({
@@ -73,8 +119,27 @@ $(document).ready(function() {
   $("#pounds-kilos-select").change(function() {
     if ($(this).val() != '') {
       $(".pounds-kilos-container").removeClass('hide');
+      $("#pounds-kilos-number").attr("placeholder", "Weight in " + $(this).val()).focus().blur();
     } else {
       $(".pounds-kilos-container").addClass('hide');
+    }
+  });
+
+  $("#cbm-select").change(function() {
+    console.log('pop');
+    if ($(this).val() != '') {
+      $(".cbm-container").removeClass('hide')
+      $("#cbm-number").attr("placeholder", "Quantity " + $(this).val()).focus().blur();
+    } else {
+      $(".cbm-container").addClass('hide');
+    }
+  });
+
+  $("#door-select").change(function() {
+    if ($(this).val() != '') {
+      $(".door-container").removeClass('hide');
+    } else {
+      $(".door-container").addClass('hide');
     }
   });
 });

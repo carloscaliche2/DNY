@@ -140,32 +140,36 @@ if (isset($_POST['stripHTML']) and $_POST['stripHTML'] == 'true') {
 }
 */
 
-function formLCLOcean($name, $name2, $Company, $email, $phone, $numbers, $name11, $name12, $name13, $option2, $name15, $name16, $numbers3, $numbers4, $numbers5,$message1)
-{
+function formLCLOcean($name,
+                      $lastName,
+                      $company,
+                      $email,
+                      $phone,
+                      $piecesNumber,
+                      $weight,
+                      $dimension,
+                      $deliver,
+                      $measures,
+                      $description) {
+
     $subject = 'A message from your site visitor ';
 
     $message_body = '<p>Name Visitor: ' . $name . '</p>' . "\n" . '<br>' . "\n";
     $subject = $name;
-    $message_body .= '<p>Last Name Visitor: ' . $name2 . '</p>' . "\n" . '<br>' . "\n";
-    $subject .= $name2;
-    $message_body .= '<p>Company: ' . $Company . '</p>' . "\n" . '<br>' . "\n";
-    $subject .= $Company;
+    $message_body .= '<p>Last Name Visitor: ' . $lastName . '</p>' . "\n" . '<br>' . "\n";
+    $subject .= $lastName;
+    $message_body .= '<p>Company: ' . $company . '</p>' . "\n" . '<br>' . "\n";
+    $subject .= $company;
     $message_body .= '<p>Email Address: ' . $email . '</p>' . "\n" . '<br>' . "\n";
     $user_email = $email;
     $message_body .= '<p>Phone Number: ' . $phone . '</p>' . "\n" . '<br>' . "\n";
-    $message_body .= '<p>Number of Pieces: ' . $numbers . '</p>' . "\n" . '<br>' . "\n";
-    $message_body .= '<p>Pound or Kilos: ' . $name11 . '</p>' . "\n" . '<br>' . "\n";
-    $message_body .= '<p>Quantity Pound: ' . $name12 . '</p>' . "\n" . '<br>' . "\n";
-    $message_body .= '<p>Quantity Kilos: ' . $name13 . '</p>' . "\n" . '<br>' . "\n";
-    $message_body .= '<p>CBM or CBF: ' . $option2 . '</p>' . "\n" . '<br>' . "\n";
-    $message_body .= '<p>Quantity CBM: ' . $name15 . '</p>' . "\n" . '<br>' . "\n";
-    $message_body .= '<p>Quantity CBF: ' . $name16 . '</p>' . "\n" . '<br>' . "\n";
-    $message_body .= '<p>Dimesion L: ' . $numbers3 . '</p>' . "\n" . '<br>' . "\n";
-    $subject .= $numbers3;
-    $message_body .= '<p>Dimesion W: ' . $numbers4 . '</p>' . "\n" . '<br>' . "\n";
-    $message_body .= '<p>Dimesion H: ' . $numbers5 . '</p>' . "\n" . '<br>' . "\n";
+    $message_body .= '<p>Number of Pieces: ' . $piecesNumber . '</p>' . "\n" . '<br>' . "\n";
+    $message_body .= '<p>Weight: ' . $weight . '</p>' . "\n" . '<br>' . "\n";
+    $message_body .= '<p>Dimension: ' . $dimension . '</p>' . "\n" . '<br>' . "\n";
+    $message_body .= '<p>Deliver: ' . $deliver . '</p>' . "\n" . '<br>' . "\n";
+    $message_body .= '<p>Measures: ' . $measures . '</p>' . "\n" . '<br>' . "\n";
 
-        $message_body .= '<p>Message LCL OCEAN RATES: ' . $message1 . '</p>' . "\n";
+    $message_body .= '<p>Message LCL OCEAN RATES: ' . $description . '</p>' . "\n";
 
 return true;
     //$this->enviarCorreo($user_email, $message_body, $subject);

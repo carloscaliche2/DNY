@@ -2,6 +2,18 @@
 $name=stripslashes($_POST["name"]);
 $email=stripslashes($_POST["email"]);
 $lastName=stripslashes($_POST["lastName"]);
+$company=stripslashes($_POST["company"]);
+$phone=stripslashes($_POST["phone"]);
+$piecesNumber=stripslashes($_POST["piecesNumber"]);
+$weight=stripslashes($_POST["weight"]);
+$weightType=stripslashes($_POST["weightType"]);
+$cbm=stripslashes($_POST["cbm"]);
+$cbmType=stripslashes($_POST["cbmType"]);
+$origin=stripslashes($_POST["origin"]);
+$destinationPort=stripslashes($_POST["destinationPort"]);
+$originType=stripslashes($_POST["originType"]);
+$measures=stripslashes($_POST["measures"]);
+$description=stripslashes($_POST["description"]);
 $secret="6LectD0UAAAAACCPJ3mg-wEcfU-0-Y0ATTmZkp4P";
 $response=$_POST["captcha"];
 
@@ -21,5 +33,22 @@ if ($captcha_success->success==false) {
 } else if ($captcha_success->success==true) {
   error_log('This user is verified by recaptcha', 4);  // This is not an error, I used it just to print in the console
   // Here you can send emails, save to the DB or whatever is needed, the form is validated
+
+  $retorna=$Corre->formLCLOcean($name,
+                                $lastName,
+                                $company,
+                                $email,
+                                $phone,
+                                $piecesNumber,
+                                $weight.$weightType,
+                                $cbm.$cbmType,
+                                $dimension,
+                                $originType." | "."from". $origin." to ".$destinationPort,
+                                $measures,
+                                $description)
+
+  if($retorna){
+    $banMS=true;
+  }
 }
 ?>
